@@ -1,15 +1,14 @@
 const container = document.querySelector(".container");
 const optionsContainer = document.querySelector(".options-container");
-let apiKey = "4c32a628146841299f4f356e4276ba9a"; // Ganti dengan kunci API News Anda
+let apiKey = "4c32a628146841299f4f356e4276ba9a";
 let requestURL;
-let selectedCategory = "general"; // Kategori default
+let selectedCategory = "general";
+let country = "id"; // Menambahkan inisialisasi variabel country
 
 const options = ["general", "sport", "science", "entertainment", "politics"];
 
-// Create cards from data
 const generateUI = (articles) => {
     for (let item of articles) {
-        // Log the image URL to the console
         console.log("Image URL:", item.urlToImage);
 
         let card = document.createElement("div");
@@ -33,8 +32,6 @@ const generateUI = (articles) => {
     }
 };
 
-
-// News API Call
 const getNews = async() => {
     container.innerHTML = "";
     let response = await fetch(requestURL);
@@ -46,24 +43,18 @@ const getNews = async() => {
     generateUI(data.articles);
 };
 
-// Category Selection
 const selectCategory = (e, category) => {
     let options = document.querySelectorAll(".option");
     options.forEach((element) => {
         element.classList.remove("active");
     });
 
-    selectedCategory = category; // Menyimpan nilai kategori yang dipilih
-
-    // Pastikan URL menggunakan HTTPS
-    // let requestURL = `https://newsapi.org/v2/top-headlines?country=id&category=general&apiKey=4c32a628146841299f4f356e4276ba9a`;
-
-    requestURL = `https://newsapi.org/v2/top-headlines?country=id&category=${selectedCategory}&apiKey=${apiKey}`;
+    selectedCategory = category;
+    requestURL = `https://newsapi.org/v2/top-headlines?country=${country}&category=${selectedCategory}&apiKey=${apiKey}`;
     e.target.classList.add("active");
     getNews();
 };
 
-// Options Buttons
 const createOptions = () => {
     for (let i of options) {
         optionsContainer.innerHTML += `<button class="option ${
@@ -72,19 +63,11 @@ const createOptions = () => {
     }
 };
 
-const init = (selectedCountry, selectedApiKey, selectedCategory) => {
-    // Mengganti nilai country, apiKey, dan selectedCategory jika disediakan
-    if (selectedCountry) {
-        country = selectedCountry;
-    }
-
-    if (selectedApiKey) {
-        apiKey = selectedApiKey;
-    }
-
-    if (selectedCategory) {
-        selectedCategory = selectedCategory;
-    }
+const init = () => {
+    // Menambahkan nilai default atau sesuaikan kebutuhan
+    country = "id";
+    apiKey = "4c32a628146841299f4f356e4276ba9a";
+    selectedCategory = "general";
 
     optionsContainer.innerHTML = "";
     getNews();
