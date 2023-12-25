@@ -1,6 +1,5 @@
 const container = document.querySelector(".container");
 const optionsContainer = document.querySelector(".options-container");
-let country = "id";
 let apiKey = "4c32a628146841299f4f356e4276ba9a"; // Ganti dengan kunci API News Anda
 let requestURL;
 let selectedCategory = "general"; // Kategori default
@@ -56,7 +55,10 @@ const selectCategory = (e, category) => {
 
     selectedCategory = category; // Menyimpan nilai kategori yang dipilih
 
-    requestURL = `https://newsapi.org/v2/top-headlines?country=${country}&category=${selectedCategory}&apiKey=${apiKey}`;
+    // Pastikan URL menggunakan HTTPS
+    // let requestURL = `https://newsapi.org/v2/top-headlines?country=id&category=general&apiKey=4c32a628146841299f4f356e4276ba9a`;
+
+    requestURL = `https://newsapi.org/v2/top-headlines?country=id&category=${selectedCategory}&apiKey=${apiKey}`;
     e.target.classList.add("active");
     getNews();
 };
