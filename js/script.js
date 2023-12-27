@@ -5,7 +5,7 @@ let requestURL;
 let selectedCategory = "general";
 let country = "id"; // Menambahkan inisialisasi variabel country
 
-const options = ["general", "sport", "science", "entertainment", "politics"];
+const options = ["GENERAL", "SPORTS", "SCIENCE", "TECHNOLOGY", "ENTERTAINMENT"];
 
 const generateUI = (articles) => {
     for (let item of articles) {
